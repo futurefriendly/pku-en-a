@@ -1,0 +1,14 @@
+/* lt IE8 fix */
+
+.ico_information,
+.ico_information i,
+.ico_information_s,
+.ico_plat,
+.carousel-indicators li,
+.icon-prev,
+.icon-next{ background-image:url(../../assets/images/sprite_s.png);}
+.ico_information_s{ background-image:url(../../assets/images/sprite_xs.png);}
+
+.m_information .item{ *zoom:1;}
+.m_information .item .ico_information{ *display:none}
+.m_information .item .desc{ *display:block}

@@ -1,0 +1,239 @@
+//
+// Carousel
+// --------------------------------------------------
+
+
+// Wrapper for the slide container and indicators
+.carousel {
+  position: relative;
+}
+
+.carousel-inner {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+
+  > .items {
+    display: none;
+    position: relative;
+    .transition(.6s ease-in-out left);
+
+    // Account for jankitude on images
+    > img,
+    > a > img {
+      &:extend(.img-responsive);
+      line-height: 1;
+    }
+  }
+
+  > .active,
+  > .next,
+  > .prev {
+    display: block;
+  }
+
+  > .active {
+    left: 0;
+  }
+
+  > .next,
+  > .prev {
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  > .next {
+    left: 100%;
+  }
+  > .prev {
+    left: -100%;
+  }
+  > .next.left,
+  > .prev.right {
+    left: 0;
+  }
+
+  > .active.left {
+    left: -100%;
+  }
+  > .active.right {
+    left: 100%;
+  }
+
+}
+
+// Left/right controls for nav
+// ---------------------------
+
+.carousel-control {
+  position: absolute;
+  z-index:11;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: @carousel-control-width;
+  .opacity(@carousel-control-opacity);
+  font-size: @carousel-control-font-size;
+  color: @carousel-control-color;
+  text-align: center;
+  text-shadow: @carousel-text-shadow;
+  // We can't have this transition here because WebKit cancels the carousel
+  // animation if you trip this while in the middle of another animation.
+
+  // Set gradients for backgrounds
+  &.left {
+    //#gradient > .horizontal(@start-color: rgba(0,0,0,.5); @end-color: rgba(0,0,0,.0001));
+  }
+  &.right {
+    left: auto;
+    right: 0;
+    //#gradient > .horizontal(@start-color: rgba(0,0,0,.0001); @end-color: rgba(0,0,0,.5));
+  }
+
+  // Hover/focus state
+  &:hover,
+  &:focus {
+    outline: 0;
+    color: @carousel-control-color;
+    text-decoration: none;
+    .opacity(.9);
+  }
+
+  // Toggles
+  .icon-prev,
+  .icon-next,
+  .glyphicon-chevron-left,
+  .glyphicon-chevron-right {
+    position: absolute;
+    top: 43%;
+    z-index: 5;
+    display: inline-block;
+  }
+  .icon-prev,
+  .glyphicon-chevron-left {
+    left: 50%;
+    margin-left: -10px;
+  }
+  .icon-next,
+  .glyphicon-chevron-right {
+    right: 50%;
+    margin-right: -10px;
+  }
+  .icon-prev,
+  .icon-next {
+    width:  15px;
+    height: 25px;
+    font-size:0;
+  }
+  .icon-prev{
+    background-position:-105px -82px
+  }
+  .icon-next{
+    background-position:-121px -82px
+  }
+
+}
+
+// Optional indicator pips
+//
+// Add an unordered list with the following class and add a list item for each
+// slide your carousel holds.
+
+.carousel-indicators {
+  position: absolute;
+  padding:3px 0;
+  top: 12px;
+  left: 50%;
+  z-index: 15;
+  width: 68px;
+  margin-left: -34px;
+  padding-left: 0;
+  list-style: none;
+  text-align: center;
+  background:#a1a1a1\9;
+  background:rgba(0,0,0,.37);
+  border-radius:3px;
+  font-size:0;
+
+  li {
+    display: inline-block;
+    overflow:hidden;
+    width:  8px;
+    height: 8px;
+    text-indent: -999px;
+    background-position:-136px -51px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin:1px 3px;
+  }
+  .active {
+    width:  8px;
+    height: 8px;
+    background-position:-136px -60px;
+  }
+}
+
+// Optional captions
+// -----------------------------
+// Hidden by default for smaller viewports
+.carousel-caption {
+  position: absolute;
+  left:0;
+  width:100%;
+  bottom:0;
+  z-index: 10;
+  color: @carousel-caption-color;
+  & .btn {
+    text-shadow: none; // No shadow for button elements in carousel-caption
+  }
+}
+
+
+// Scale up controls for tablets and up
+@media screen and (min-width: @screen-sm-min) {
+
+  // Scale up the controls a smidge
+  .carousel-control {
+    .glyphicon-chevron-left,
+    .glyphicon-chevron-right,
+    .icon-prev,
+    .icon-next {
+      width: 30px;
+      height: 30px;
+      font-size: 30px;
+    }
+    .glyphicon-chevron-left,
+    .icon-prev {
+      margin-left: -15px;
+    }
+    .glyphicon-chevron-right,
+    .icon-next {
+      margin-right: -15px;
+    }
+    .icon-prev,
+    .icon-next{
+      width:30px;
+      height:50px;
+      background-size:308px 248px;
+      margin-top:-25px;
+    }
+    .icon-prev{
+      background-position:-210px -164px;
+    }
+    .icon-next{
+      background-position:-242px -164px;
+    }
+  }
+
+  // Show and left align the captions
+  .carousel-caption {
+    left: 0;
+    padding-bottom: 0;
+  }
+
+  // Move up the indicators
+  .carousel-indicators {
+    top: 12px;
+  }
+}
